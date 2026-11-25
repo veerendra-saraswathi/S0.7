@@ -30,6 +30,20 @@ def build_manifest(directory, collection_id, width, height, storage):
             "width": width, "height": height, "storage": storage, "frames": frames}
 
 
+def verify_manifest(manifest_bytes, directory):
+    saved = json.loads(manifest_bytes)
+    if not isinstance(saved, dict) or saved.get("schema") != "s07.raw-collection.v1":
+        raise ValueError("unsupported manifest schema")
+    if (type(saved.get("width")) is not int or type(saved.get("height")) is not int
+            or not isinstance(saved.get("collection_id"), str)):
+        raise ValueError("invalid collection metadata")
+    current = build_manifest(directory, saved["collection_id"], saved["width"],
+                             saved["height"], saved["storage"])
+    if current != saved:
+        raise ValueError("frame inventory, order or content differs from the manifest")
+    return current
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -48,16 +62,7 @@ def main():
             manifest = build_manifest(args.directory, args.id, args.width, args.height, args.storage)
             print(json.dumps(manifest, indent=2))
         else:
-            saved = json.loads(args.manifest.read_text(encoding="utf-8"))
-            if not isinstance(saved, dict) or saved.get("schema") != "s07.raw-collection.v1":
-                raise ValueError("unsupported manifest schema")
-            if (type(saved.get("width")) is not int or type(saved.get("height")) is not int
-                    or not isinstance(saved.get("collection_id"), str)):
-                raise ValueError("invalid collection metadata")
-            current = build_manifest(args.directory, saved["collection_id"], saved["width"],
-                                     saved["height"], saved["storage"])
-            if current != saved:
-                raise ValueError("frame inventory, order or content differs from the manifest")
+            current = verify_manifest(args.manifest.read_bytes(), args.directory)
             print(f"Verified {len(current['frames'])} frames for {current['collection_id']}")
     except (KeyError, OSError, ValueError) as error:
         parser.exit(1, f"collection: {error}\n")

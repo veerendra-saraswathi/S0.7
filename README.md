@@ -19,6 +19,19 @@ python3 tools/collection.py verify "$demo_dir/collection.json" "$demo_dir"
 
 Expected output: `Verified 2 frames for bench-demo`. Verification checks the saved inventory and content digests. This first step establishes input identity for a later codec run.
 
+## Run a lossless Bitrate2 round trip
+
+Build the two C++17 CLI targets from a Bitrate2 checkout (tested with commit `921da01`). Set `codec_src` to that checkout. Run the collection example above in the same terminal first.
+
+```sh
+codec_src="$HOME/ombitrate"
+cmake -S "$codec_src" -B "$codec_src/build" -DCMAKE_BUILD_TYPE=Release
+cmake --build "$codec_src/build" --target ewc_enc ewc_dec
+python3 tools/codec_run.py "$demo_dir/collection.json" "$demo_dir" --bin-dir "$codec_src/build" --output "$demo_dir/runs"
+```
+
+A successful run prints a new directory containing the input manifest, encoded stream, reconstructed sequence and `run.json`. The report records the exact executable hashes, CLI settings and output hashes. The decoder produces little-endian 16-bit samples; 8-bit input values are zero-extended before encoding. Success requires the decoded sequence to match that canonical input byte for byte. Each invocation gets its own directory. This checks lossless reconstruction; it does not benchmark the fixed-rate profile.
+
 ## What the project will do
 
 | Article 4 problem | Planned capability | What an engineer will be able to inspect |
