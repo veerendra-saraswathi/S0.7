@@ -2,7 +2,22 @@
 
 **Samanvaya 0.7 is EGurukul Apps’ visible and infrared imaging programme.** We are developing a laboratory software suite that brings six imaging problems into one review workflow. An engineer should be able to open a recorded collection, compare an original frame with a processed result, and trace that result to the sensor, calibration and software build that produced it.
 
-This repository starts with the product scope and roadmap. The component prototypes described below are developed separately. The integrated suite is in development.
+This repository contains the product roadmap and a Python 3 utility for recording and verifying raw-frame collections. The component prototypes described below are developed separately. The integrated suite is in development.
+
+## Try the first collection check
+
+Use Python 3 and a completed collection of single-channel, headerless frames. Store one frame per `.raw` file in a directory and use zero-padded filenames in acquisition order. The manifest lists frames in filename order and records a SHA-256 digest for each. Width, height and storage format are supplied by the caller. The format describes storage (8-bit or little-endian 16-bit), not effective sensor precision.
+
+From the repository root, run this two-frame synthetic example:
+
+```sh
+demo_dir=$(mktemp -d)
+python3 -c 'from pathlib import Path; import sys; p = Path(sys.argv[1]); (p / "001.raw").write_bytes(bytes(range(4))); (p / "002.raw").write_bytes(bytes(range(4, 8)))' "$demo_dir"
+python3 tools/collection.py create "$demo_dir" --id bench-demo --width 2 --height 2 --storage u8 > "$demo_dir/collection.json"
+python3 tools/collection.py verify "$demo_dir/collection.json" "$demo_dir"
+```
+
+Expected output: `Verified 2 frames for bench-demo`. Verification checks the saved inventory and content digests. This first step establishes input identity for a later codec run.
 
 ## What the project will do
 
