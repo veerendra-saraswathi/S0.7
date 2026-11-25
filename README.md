@@ -32,7 +32,17 @@ python3 tools/codec_run.py "$demo_dir/collection.json" "$demo_dir" --bin-dir "$c
 
 A successful run prints a new directory containing the input manifest, encoded stream, reconstructed sequence and `run.json`. The report records the exact executable hashes, CLI settings and output hashes. The decoder produces little-endian 16-bit samples; 8-bit input values are zero-extended before encoding. Success requires the decoded sequence to match that canonical input byte for byte. Each invocation gets its own directory. This checks lossless reconstruction; it does not benchmark the fixed-rate profile.
 
-### Verify a saved run offline
+### Measure the fixed-rate profile
+
+Use a collection manifest and its frame directory with the same runner:
+
+```sh
+python3 tools/codec_run.py "$demo_dir/collection.json" "$demo_dir" --bin-dir "$codec_src/build" --output "$demo_dir/runs" --profile fixed-2mbps
+```
+
+This tiled profile targets 2,000,000 encoded bits/s at a nominal 30 fps (8,333 bytes/frame). In `run.json`, `metrics` records the actual stream bitrate at that playback rate, per-frame byte counts, encoder time, PSNR and maximum absolute sample error. PSNR uses the storage range (8 or 16 bits); JSON null means exact reconstruction. Encoder timing comes from the codec CSV, in milliseconds to three decimal places. Budget and two-frame deadline misses are counted and retained for review. The bitrate excludes network overhead; the tiny README example exercises the workflow only. Use representative full-size frames for performance evaluation.
+
+### Verify a saved lossless run offline
 
 Pass the directory printed by the codec runner to `python3 tools/verify_run.py /path/to/run-directory`.
 The verifier checks the manifest and bitstream against the saved report, then checks the decoded samples against each source frame digest in order. It requires only Python and the four saved run files. This is a consistency check against the recorded evidence; authenticating the author or independently decoding the stream requires separate evidence.

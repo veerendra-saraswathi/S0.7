@@ -43,3 +43,28 @@ class CodecRunTests(unittest.TestCase):
                 frame.write_bytes(raw[::-1])
                 self.assertNotEqual(subprocess.run(command, capture_output=True).returncode, 0)
                 self.assertEqual(list(output.iterdir()), [directory])
+
+    def test_fixed_rate_metrics(self):
+        import random
+        import struct
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            raw = random.Random(25).randbytes(128 * 128)
+            (root / "001.raw").write_bytes(raw)
+            manifest = root / "collection.json"
+            manifest.write_bytes(subprocess.check_output([
+                sys.executable, TOOLS / "collection.py", "create", root, "--id", "noise",
+                "--width", "128", "--height", "128", "--storage", "u8"]))
+            run = subprocess.check_output([
+                sys.executable, TOOLS / "codec_run.py", manifest, root, "--profile", "fixed-2mbps",
+                "--bin-dir", os.environ["BITRATE2_BIN_DIR"], "--output", root / "runs"], text=True)
+            directory = Path(run.strip())
+            metrics = json.loads((directory / "run.json").read_text())["metrics"]
+            frame = metrics["frames"][0]
+            reconstructed = struct.unpack("<16384H", (directory / "decoded.u16").read_bytes())
+            max_error = max(abs(a - b) for a, b in zip(raw, reconstructed))
+            self.assertGreater(max_error, 0)
+            self.assertEqual(frame["max_abs_error"], max_error)
+            self.assertEqual(metrics["budget_misses"], 0)
+            self.assertEqual(metrics["achieved_bps"], (directory / "encoded.ewc").stat().st_size * 240)
+            self.assertEqual(metrics["deadline_misses"], int(frame["encode_ms"] > 2000 / 30))
