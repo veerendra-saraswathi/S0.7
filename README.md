@@ -32,6 +32,11 @@ python3 tools/codec_run.py "$demo_dir/collection.json" "$demo_dir" --bin-dir "$c
 
 A successful run prints a new directory containing the input manifest, encoded stream, reconstructed sequence and `run.json`. The report records the exact executable hashes, CLI settings and output hashes. The decoder produces little-endian 16-bit samples; 8-bit input values are zero-extended before encoding. Success requires the decoded sequence to match that canonical input byte for byte. Each invocation gets its own directory. This checks lossless reconstruction; it does not benchmark the fixed-rate profile.
 
+### Verify a saved run offline
+
+Pass the directory printed by the codec runner to `python3 tools/verify_run.py /path/to/run-directory`.
+The verifier checks the manifest and bitstream against the saved report, then checks the decoded samples against each source frame digest in order. It requires only Python and the four saved run files. This is a consistency check against the recorded evidence; authenticating the author or independently decoding the stream requires separate evidence.
+
 ## What the project will do
 
 | Article 4 problem | Planned capability | What an engineer will be able to inspect |

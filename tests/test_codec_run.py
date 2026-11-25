@@ -32,6 +32,14 @@ class CodecRunTests(unittest.TestCase):
                 expected = bytes([0, 0, 1, 0, 2, 0, 3, 0]) if storage == "u8" else raw
                 self.assertEqual((directory / "decoded.u16").read_bytes(), expected)
                 self.assertEqual(report["decoded_sha256"], hashlib.sha256(expected).hexdigest())
+                verify = [sys.executable, str(TOOLS / "verify_run.py"), directory]
+                subprocess.run(verify, capture_output=True, check=True)
+                for name in ("decoded.u16", "encoded.ewc", "collection.json"):
+                    path = directory / name
+                    original = path.read_bytes()
+                    path.write_bytes(bytes([original[0] ^ 1]) + original[1:])
+                    self.assertNotEqual(subprocess.run(verify, capture_output=True).returncode, 0, name)
+                    path.write_bytes(original)
                 frame.write_bytes(raw[::-1])
                 self.assertNotEqual(subprocess.run(command, capture_output=True).returncode, 0)
                 self.assertEqual(list(output.iterdir()), [directory])
