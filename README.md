@@ -47,6 +47,16 @@ This tiled profile targets 2,000,000 encoded bits/s at a nominal 30 fps (8,333 b
 Pass the directory printed by the codec runner to `python3 tools/verify_run.py /path/to/run-directory`.
 The verifier checks the manifest and bitstream against the saved report, then checks the decoded samples against each source frame digest in order. It requires only Python and the four saved run files. This is a consistency check against the recorded evidence; authenticating the author or independently decoding the stream requires separate evidence.
 
+### Query the saved evidence
+
+Which recorded collections exceeded the encoder deadline, and which build produced the observations?
+
+```sh
+python3 tools/query_deadlines.py benchmarks/flir-4frnnp/run.json benchmarks/flir-six-clips/*.json
+```
+
+Each row links a codec run to its collection, binary hashes and source report. The query recomputes misses using each report’s deadline. Zero-miss runs remain visible. Add `--json` for the full hashes, manifest identity and individual missed frames (zero-based index into the source report). Counts are frame observations across the supplied runs. This read-only semantic query uses Python and the committed reports; it runs without the codec, original imagery or an ontology service.
+
 ## What the project will do
 
 | Article 4 problem | Planned capability | What an engineer will be able to inspect |
@@ -62,7 +72,7 @@ The verifier checks the manifest and bitstream against the saved report, then ch
 
 As of 25 November 2026, EGurukul Apps has submitted proposals for **Problems 1, 2, 4 and 6**. Bitrate compression and object detection have progressed beyond proof of concept and are the first two solutions planned for technical review. Initial proof-of-concept work has begun on **Problems 3 and 5**.
 
-The current compression and detection work can be followed in the component repositories: [Bitrate](https://github.com/veerendra-saraswathi/bitrate), [Bitrate Architecture E](https://github.com/veerendra-saraswathi/bitrate2) and [Object Detection](https://github.com/veerendra-saraswathi/detection).
+The current compression and detection work can be followed in the component repositories: [Bitrate](https://github.com/veerendra-saraswathi/bitrate), [Bitrate Architecture E](https://github.com/veerendra-saraswathi/bitrate2) and [RCI Detection](https://github.com/veerendra-saraswathi/rci-detection).
 
 ## Product roadmap
 
