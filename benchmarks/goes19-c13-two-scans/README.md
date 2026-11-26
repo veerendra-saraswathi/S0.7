@@ -10,3 +10,13 @@ The host run exported each entire Rad array in row-major order as unsigned littl
 | 2 | 8315 | 74.29 | 3702837 | 132.92 | 3494 |
 
 Errors above compare the decoded samples to the original packed values where DQF equals 0 and Rad lies within 0–4094. Fill and flagged pixels are excluded from this score but included in the encoded input. The [machine report](run.json) also records whole-grid codec metrics. Timings cover a single host run. This two-scan experiment is separate from camera-video coverage and from the v4 snapshot.
+
+### Reproduce the recorded output
+
+From S0.7, run the following with a Python interpreter containing h5py and the recorded Bitrate2 binaries:
+
+```sh
+python benchmarks/goes19-c13-two-scans/reproduce.py --bin-dir "$HOME/bitrate2/ombitrate/build"
+```
+
+The replay downloads the two source NetCDF files to a temporary directory. To reuse local files, add `--scans FIRST.nc SECOND.nc`. It compares SHA-256 digests for the original scans, binaries, packed input, encoded stream and reconstructed samples. Encoder times are printed as new observations. They vary with host conditions.
