@@ -26,3 +26,5 @@ The replay downloads the two source NetCDF files to a temporary directory. To re
 The [two reported Mac replays](replays/reported-mac-times.csv) transcribe the per-scan encoder times from the operator’s terminal. Each invocation reported successful byte verification and one encoder deadline miss. Their exact start times were unrecorded.
 
 Add `--record` to the replay command to save the full measured run under `replays/replay-<id>.json`. Each successful check produces a separate file with per-scan timings, observed misses, verification time in UTC, source digests and the digest of the baseline report.
+
+Run `python3 benchmarks/goes19-c13-two-scans/compare_timings.py` from S0.7 to compare saved scan times without downloading data or rerunning the codec. JSON replay rows are checked against the baseline digest, build, settings, scan order and output hashes. Terminal transcript rows use the manually recorded times. Rows represent repeated measurements of the same two scans.
