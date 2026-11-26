@@ -1,11 +1,14 @@
 """Replay the two published GOES-19 weather rasters against the recorded report."""
 import argparse
+from datetime import datetime, timezone
+import hashlib
 import json
 from pathlib import Path
 import shutil
 import sys
 import tempfile
 from urllib.request import urlopen
+from uuid import uuid4
 
 import h5py
 
@@ -24,7 +27,9 @@ SCANS = [
 
 
 def replay(args, work):
-    expected = json.loads(Path(__file__).with_name('run.json').read_text())
+    baseline = Path(__file__).with_name('run.json')
+    baseline_bytes = baseline.read_bytes()
+    expected = json.loads(baseline_bytes)
     for name, sha in expected['binary_sha256'].items():
         if file_digest(args.bin_dir / name) != sha:
             raise ValueError(f'codec build differs: {name}')
@@ -52,6 +57,20 @@ def replay(args, work):
                 'encoded_sha256', 'decoded_sha256'):
         if actual[key] != expected[key]:
             raise ValueError(f'replay differs from recorded report: {key}')
+    if args.record:
+        folder = baseline.parent / 'replays'
+        folder.mkdir(exist_ok=True)
+        actual['replay'] = {
+            'verified_at_utc': datetime.now(timezone.utc).isoformat(),
+            'baseline_sha256': hashlib.sha256(baseline_bytes).hexdigest(),
+            'sources': [{'file': name, 'sha256': sha} for name, sha in SCANS],
+        }
+        destination = folder / f'replay-{uuid4().hex}.json'
+        with tempfile.TemporaryDirectory(dir=folder) as stage:
+            staged = Path(stage) / 'record.json'
+            staged.write_text(json.dumps(actual, indent=2) + '\n', encoding='utf-8')
+            staged.rename(destination)
+        print('Saved verified replay:', destination)
     print('Verified both source scans, codec build, settings, packed input, bitstream and decoded samples.')
     print('Replay encoder times (ms):', [r['encode_ms'] for r in actual['metrics']['frames']])
 
@@ -60,6 +79,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--bin-dir', type=Path, required=True)
     parser.add_argument('--scans', nargs=2, type=Path, help='local originals in acquisition order; default downloads both')
+    parser.add_argument('--record', action='store_true', help='save a new verified run under the benchmark replays directory')
     args = parser.parse_args()
     try:
         with tempfile.TemporaryDirectory(prefix='goes19-replay-') as tmp:

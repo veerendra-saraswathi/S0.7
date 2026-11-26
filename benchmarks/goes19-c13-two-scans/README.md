@@ -20,3 +20,9 @@ python benchmarks/goes19-c13-two-scans/reproduce.py --bin-dir "$HOME/bitrate2/om
 ```
 
 The replay downloads the two source NetCDF files to a temporary directory. To reuse local files, add `--scans FIRST.nc SECOND.nc`. It compares SHA-256 digests for the original scans, binaries, packed input, encoded stream and reconstructed samples. Encoder times are printed as new observations. They vary with host conditions.
+
+### Replay timing records
+
+The [two reported Mac replays](replays/reported-mac-times.csv) transcribe the per-scan encoder times from the operator’s terminal. Each invocation reported successful byte verification and one encoder deadline miss. Their exact start times were unrecorded.
+
+Add `--record` to the replay command to save the full measured run under `replays/replay-<id>.json`. Each successful check produces a separate file with per-scan timings, observed misses, verification time in UTC, source digests and the digest of the baseline report.
