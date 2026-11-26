@@ -1,0 +1,756 @@
+{
+  "schema": "s07.codec-run.v1",
+  "profile": "fixed-2mbps",
+  "collection_id": "crowd-run-1080p-luma",
+  "manifest_sha256": "4be8317edc265976472bb7c805f61a0dc7e76ca8db16e2691e82d131bb6ce31e",
+  "frame_count": 100,
+  "binary_sha256": {
+    "ewc_enc": "76ca0b8948b147e932d714071930fd768e54e5c51cffe6dace97b730e6088adf",
+    "ewc_dec": "a8cbc4c4c5e578d2d420b5a4e2f202b7322d1ff46a3783c221e2f1dcbe60512c"
+  },
+  "encoder_args": [
+    "-i",
+    "sequence.u16",
+    "-o",
+    "encoded.ewc",
+    "-W",
+    "1920",
+    "-H",
+    "1080",
+    "--bd",
+    "8",
+    "--kbps",
+    "2000",
+    "--fps",
+    "30",
+    "--tile",
+    "128",
+    "--stats",
+    "encoder.csv"
+  ],
+  "decoder_args": [
+    "-i",
+    "encoded.ewc",
+    "-o",
+    "decoded.u16",
+    "--ref",
+    "sequence.u16",
+    "--report",
+    "decoder.csv"
+  ],
+  "packed_input_sha256": "be1c194d97e4ea8af6d6bd132481dda2fe1d5df68f3fe57f1f7c80af8f7000dd",
+  "decoded_sha256": "e4bc592b81910ee122e62ab4996a465bc6cc8fe18d3620dee77f8874ef4b1c75",
+  "encoded_sha256": "98325bfe008732d539e40abdc5344dbb7d9bd27fb5638cc72948e8b2955b3d76",
+  "encoded_bytes": 831785,
+  "metrics": {
+    "target_bps": 2000000,
+    "nominal_fps": 30,
+    "frame_budget_bytes": 8333,
+    "encoder_deadline_ms": 66.66666666666667,
+    "achieved_bps": 1996284.0,
+    "budget_misses": 0,
+    "deadline_misses": 0,
+    "frames": [
+      {
+        "file": "000.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 63.818,
+        "max_abs_error": 214,
+        "psnr_db": 21.486
+      },
+      {
+        "file": "001.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 41.505,
+        "max_abs_error": 183,
+        "psnr_db": 21.364
+      },
+      {
+        "file": "002.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 40.923,
+        "max_abs_error": 181,
+        "psnr_db": 21.391
+      },
+      {
+        "file": "003.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 40.702,
+        "max_abs_error": 190,
+        "psnr_db": 21.354
+      },
+      {
+        "file": "004.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 37.983,
+        "max_abs_error": 226,
+        "psnr_db": 21.326
+      },
+      {
+        "file": "005.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 47.194,
+        "max_abs_error": 198,
+        "psnr_db": 21.351
+      },
+      {
+        "file": "006.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 46.312,
+        "max_abs_error": 187,
+        "psnr_db": 21.399
+      },
+      {
+        "file": "007.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 45.365,
+        "max_abs_error": 188,
+        "psnr_db": 21.36
+      },
+      {
+        "file": "008.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 44.364,
+        "max_abs_error": 199,
+        "psnr_db": 21.424
+      },
+      {
+        "file": "009.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 39.996,
+        "max_abs_error": 186,
+        "psnr_db": 21.388
+      },
+      {
+        "file": "010.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 45.039,
+        "max_abs_error": 208,
+        "psnr_db": 21.384
+      },
+      {
+        "file": "011.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 45.224,
+        "max_abs_error": 188,
+        "psnr_db": 21.393
+      },
+      {
+        "file": "012.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 52.5,
+        "max_abs_error": 199,
+        "psnr_db": 21.432
+      },
+      {
+        "file": "013.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 54.036,
+        "max_abs_error": 229,
+        "psnr_db": 21.428
+      },
+      {
+        "file": "014.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 56.814,
+        "max_abs_error": 194,
+        "psnr_db": 21.551
+      },
+      {
+        "file": "015.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 54.399,
+        "max_abs_error": 204,
+        "psnr_db": 21.46
+      },
+      {
+        "file": "016.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 57.809,
+        "max_abs_error": 197,
+        "psnr_db": 21.536
+      },
+      {
+        "file": "017.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 65.978,
+        "max_abs_error": 191,
+        "psnr_db": 21.534
+      },
+      {
+        "file": "018.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 53.006,
+        "max_abs_error": 201,
+        "psnr_db": 21.486
+      },
+      {
+        "file": "019.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 54.119,
+        "max_abs_error": 179,
+        "psnr_db": 21.549
+      },
+      {
+        "file": "020.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 49.576,
+        "max_abs_error": 188,
+        "psnr_db": 21.407
+      },
+      {
+        "file": "021.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 48.86,
+        "max_abs_error": 174,
+        "psnr_db": 21.56
+      },
+      {
+        "file": "022.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 42.599,
+        "max_abs_error": 192,
+        "psnr_db": 21.452
+      },
+      {
+        "file": "023.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 42.921,
+        "max_abs_error": 215,
+        "psnr_db": 21.374
+      },
+      {
+        "file": "024.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 41.471,
+        "max_abs_error": 213,
+        "psnr_db": 21.358
+      },
+      {
+        "file": "025.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 39.267,
+        "max_abs_error": 197,
+        "psnr_db": 21.401
+      },
+      {
+        "file": "026.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 39.676,
+        "max_abs_error": 213,
+        "psnr_db": 21.339
+      },
+      {
+        "file": "027.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 45.145,
+        "max_abs_error": 205,
+        "psnr_db": 21.362
+      },
+      {
+        "file": "028.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 51.454,
+        "max_abs_error": 188,
+        "psnr_db": 21.353
+      },
+      {
+        "file": "029.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 52.335,
+        "max_abs_error": 192,
+        "psnr_db": 21.434
+      },
+      {
+        "file": "030.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 53.085,
+        "max_abs_error": 193,
+        "psnr_db": 21.444
+      },
+      {
+        "file": "031.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 52.917,
+        "max_abs_error": 182,
+        "psnr_db": 21.404
+      },
+      {
+        "file": "032.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 59.658,
+        "max_abs_error": 198,
+        "psnr_db": 21.444
+      },
+      {
+        "file": "033.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 65.304,
+        "max_abs_error": 188,
+        "psnr_db": 21.56
+      },
+      {
+        "file": "034.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 52.343,
+        "max_abs_error": 199,
+        "psnr_db": 21.461
+      },
+      {
+        "file": "035.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 46.613,
+        "max_abs_error": 182,
+        "psnr_db": 21.453
+      },
+      {
+        "file": "036.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 49.507,
+        "max_abs_error": 189,
+        "psnr_db": 21.489
+      },
+      {
+        "file": "037.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 45.006,
+        "max_abs_error": 210,
+        "psnr_db": 21.413
+      },
+      {
+        "file": "038.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 42.99,
+        "max_abs_error": 184,
+        "psnr_db": 21.385
+      },
+      {
+        "file": "039.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 40.428,
+        "max_abs_error": 199,
+        "psnr_db": 21.358
+      },
+      {
+        "file": "040.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 37.316,
+        "max_abs_error": 197,
+        "psnr_db": 21.351
+      },
+      {
+        "file": "041.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 38.441,
+        "max_abs_error": 210,
+        "psnr_db": 21.434
+      },
+      {
+        "file": "042.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 41.511,
+        "max_abs_error": 177,
+        "psnr_db": 21.476
+      },
+      {
+        "file": "043.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 40.602,
+        "max_abs_error": 197,
+        "psnr_db": 21.48
+      },
+      {
+        "file": "044.raw",
+        "encoded_bytes": 8321,
+        "encode_ms": 37.651,
+        "max_abs_error": 216,
+        "psnr_db": 21.498
+      },
+      {
+        "file": "045.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 35.989,
+        "max_abs_error": 230,
+        "psnr_db": 21.559
+      },
+      {
+        "file": "046.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 35.517,
+        "max_abs_error": 199,
+        "psnr_db": 21.43
+      },
+      {
+        "file": "047.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.864,
+        "max_abs_error": 198,
+        "psnr_db": 21.558
+      },
+      {
+        "file": "048.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 33.982,
+        "max_abs_error": 191,
+        "psnr_db": 21.496
+      },
+      {
+        "file": "049.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 38.642,
+        "max_abs_error": 198,
+        "psnr_db": 21.484
+      },
+      {
+        "file": "050.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 37.927,
+        "max_abs_error": 213,
+        "psnr_db": 21.53
+      },
+      {
+        "file": "051.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.133,
+        "max_abs_error": 197,
+        "psnr_db": 21.49
+      },
+      {
+        "file": "052.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.323,
+        "max_abs_error": 196,
+        "psnr_db": 21.496
+      },
+      {
+        "file": "053.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 35.14,
+        "max_abs_error": 232,
+        "psnr_db": 21.532
+      },
+      {
+        "file": "054.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 38.642,
+        "max_abs_error": 202,
+        "psnr_db": 21.427
+      },
+      {
+        "file": "055.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 37.199,
+        "max_abs_error": 182,
+        "psnr_db": 21.472
+      },
+      {
+        "file": "056.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 33.65,
+        "max_abs_error": 197,
+        "psnr_db": 21.521
+      },
+      {
+        "file": "057.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 35.139,
+        "max_abs_error": 192,
+        "psnr_db": 21.57
+      },
+      {
+        "file": "058.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 33.923,
+        "max_abs_error": 193,
+        "psnr_db": 21.535
+      },
+      {
+        "file": "059.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 34.053,
+        "max_abs_error": 187,
+        "psnr_db": 21.62
+      },
+      {
+        "file": "060.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 36.445,
+        "max_abs_error": 203,
+        "psnr_db": 21.654
+      },
+      {
+        "file": "061.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 36.887,
+        "max_abs_error": 213,
+        "psnr_db": 21.62
+      },
+      {
+        "file": "062.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 39.581,
+        "max_abs_error": 189,
+        "psnr_db": 21.661
+      },
+      {
+        "file": "063.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 49.264,
+        "max_abs_error": 197,
+        "psnr_db": 21.651
+      },
+      {
+        "file": "064.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 51.13,
+        "max_abs_error": 191,
+        "psnr_db": 21.675
+      },
+      {
+        "file": "065.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 53.301,
+        "max_abs_error": 198,
+        "psnr_db": 21.609
+      },
+      {
+        "file": "066.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 55.267,
+        "max_abs_error": 209,
+        "psnr_db": 21.645
+      },
+      {
+        "file": "067.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 58.063,
+        "max_abs_error": 211,
+        "psnr_db": 21.581
+      },
+      {
+        "file": "068.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 52.677,
+        "max_abs_error": 180,
+        "psnr_db": 21.631
+      },
+      {
+        "file": "069.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 44.683,
+        "max_abs_error": 188,
+        "psnr_db": 21.578
+      },
+      {
+        "file": "070.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 39.235,
+        "max_abs_error": 204,
+        "psnr_db": 21.661
+      },
+      {
+        "file": "071.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 35.416,
+        "max_abs_error": 188,
+        "psnr_db": 21.52
+      },
+      {
+        "file": "072.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 33.789,
+        "max_abs_error": 187,
+        "psnr_db": 21.702
+      },
+      {
+        "file": "073.raw",
+        "encoded_bytes": 8319,
+        "encode_ms": 33.812,
+        "max_abs_error": 206,
+        "psnr_db": 21.533
+      },
+      {
+        "file": "074.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.149,
+        "max_abs_error": 214,
+        "psnr_db": 21.597
+      },
+      {
+        "file": "075.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 35.181,
+        "max_abs_error": 183,
+        "psnr_db": 21.647
+      },
+      {
+        "file": "076.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 36.332,
+        "max_abs_error": 213,
+        "psnr_db": 21.593
+      },
+      {
+        "file": "077.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 38.261,
+        "max_abs_error": 214,
+        "psnr_db": 21.578
+      },
+      {
+        "file": "078.raw",
+        "encoded_bytes": 8316,
+        "encode_ms": 35.6,
+        "max_abs_error": 175,
+        "psnr_db": 21.724
+      },
+      {
+        "file": "079.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 43.116,
+        "max_abs_error": 188,
+        "psnr_db": 21.709
+      },
+      {
+        "file": "080.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 50.652,
+        "max_abs_error": 191,
+        "psnr_db": 21.709
+      },
+      {
+        "file": "081.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 51.035,
+        "max_abs_error": 205,
+        "psnr_db": 21.683
+      },
+      {
+        "file": "082.raw",
+        "encoded_bytes": 8316,
+        "encode_ms": 50.509,
+        "max_abs_error": 224,
+        "psnr_db": 21.683
+      },
+      {
+        "file": "083.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 49.799,
+        "max_abs_error": 194,
+        "psnr_db": 21.688
+      },
+      {
+        "file": "084.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 55.867,
+        "max_abs_error": 206,
+        "psnr_db": 21.758
+      },
+      {
+        "file": "085.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 51.778,
+        "max_abs_error": 195,
+        "psnr_db": 21.71
+      },
+      {
+        "file": "086.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 48.884,
+        "max_abs_error": 198,
+        "psnr_db": 21.685
+      },
+      {
+        "file": "087.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 45.217,
+        "max_abs_error": 180,
+        "psnr_db": 21.751
+      },
+      {
+        "file": "088.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 39.987,
+        "max_abs_error": 196,
+        "psnr_db": 21.679
+      },
+      {
+        "file": "089.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 36.207,
+        "max_abs_error": 183,
+        "psnr_db": 21.726
+      },
+      {
+        "file": "090.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.051,
+        "max_abs_error": 198,
+        "psnr_db": 21.732
+      },
+      {
+        "file": "091.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.203,
+        "max_abs_error": 173,
+        "psnr_db": 21.618
+      },
+      {
+        "file": "092.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 34.383,
+        "max_abs_error": 197,
+        "psnr_db": 21.596
+      },
+      {
+        "file": "093.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 46.105,
+        "max_abs_error": 181,
+        "psnr_db": 21.564
+      },
+      {
+        "file": "094.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 48.074,
+        "max_abs_error": 205,
+        "psnr_db": 21.594
+      },
+      {
+        "file": "095.raw",
+        "encoded_bytes": 8316,
+        "encode_ms": 49.396,
+        "max_abs_error": 182,
+        "psnr_db": 21.571
+      },
+      {
+        "file": "096.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 49.195,
+        "max_abs_error": 192,
+        "psnr_db": 21.571
+      },
+      {
+        "file": "097.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 48.891,
+        "max_abs_error": 195,
+        "psnr_db": 21.6
+      },
+      {
+        "file": "098.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 48.654,
+        "max_abs_error": 219,
+        "psnr_db": 21.605
+      },
+      {
+        "file": "099.raw",
+        "encoded_bytes": 8317,
+        "encode_ms": 46.19,
+        "max_abs_error": 184,
+        "psnr_db": 21.653
+      }
+    ]
+  }
+}
