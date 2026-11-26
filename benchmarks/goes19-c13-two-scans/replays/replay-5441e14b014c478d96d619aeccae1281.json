@@ -1,0 +1,84 @@
+{
+  "schema": "s07.codec-run.v1",
+  "profile": "fixed-2mbps",
+  "collection_id": "goes19-c13-conus-two-scans",
+  "manifest_sha256": "d1d56bb36978a417d324a701ededdca54cb26f5d8a285c9eb8d3a356795ac147",
+  "frame_count": 2,
+  "binary_sha256": {
+    "ewc_enc": "76ca0b8948b147e932d714071930fd768e54e5c51cffe6dace97b730e6088adf",
+    "ewc_dec": "a8cbc4c4c5e578d2d420b5a4e2f202b7322d1ff46a3783c221e2f1dcbe60512c"
+  },
+  "encoder_args": [
+    "-i",
+    "sequence.u16",
+    "-o",
+    "encoded.ewc",
+    "-W",
+    "2500",
+    "-H",
+    "1500",
+    "--bd",
+    "16",
+    "--kbps",
+    "2000",
+    "--fps",
+    "30",
+    "--tile",
+    "128",
+    "--stats",
+    "encoder.csv"
+  ],
+  "decoder_args": [
+    "-i",
+    "encoded.ewc",
+    "-o",
+    "decoded.u16",
+    "--ref",
+    "sequence.u16",
+    "--report",
+    "decoder.csv"
+  ],
+  "packed_input_sha256": "8636b9aac3677d0eea28de96e098497dc2d8a0e741a81ea1aafaf5e59c9c7b9d",
+  "decoded_sha256": "591894e5271d4df03a440cc64f1569ac60b351e350738abb00f1249bea322256",
+  "encoded_sha256": "f54b1b3df00216958b522485ba23813c5879d155a3faf940c3d11081504a96b5",
+  "encoded_bytes": 16630,
+  "metrics": {
+    "target_bps": 2000000,
+    "nominal_fps": 30,
+    "frame_budget_bytes": 8333,
+    "encoder_deadline_ms": 66.66666666666667,
+    "achieved_bps": 1995600.0,
+    "budget_misses": 0,
+    "deadline_misses": 1,
+    "frames": [
+      {
+        "file": "000.raw",
+        "encoded_bytes": 8315,
+        "encode_ms": 87.408,
+        "max_abs_error": 2870,
+        "psnr_db": 53.827
+      },
+      {
+        "file": "001.raw",
+        "encoded_bytes": 8315,
+        "encode_ms": 61.638,
+        "max_abs_error": 3494,
+        "psnr_db": 53.814
+      }
+    ]
+  },
+  "replay": {
+    "verified_at_utc": "2026-11-26T18:30:37.199091+00:00",
+    "baseline_sha256": "06157fb4a02ee80b6dbf28094d2b4fe5c353d9abc792a868c19ece49822a0f34",
+    "sources": [
+      {
+        "file": "OR_ABI-L1b-RadC-M6C13_G19_s20252001201181_e20252001203566_c20252001204051.nc",
+        "sha256": "28699d68ae9713b9d230ae1f5f09cad600f44a5aace160fdbfca19100602c0fe"
+      },
+      {
+        "file": "OR_ABI-L1b-RadC-M6C13_G19_s20252001206181_e20252001208566_c20252001209001.nc",
+        "sha256": "d17c68dc7bfef01d638057e02b660669dc2ae87700c199b25c2d9d16c856eaf5"
+      }
+    ]
+  }
+}
